@@ -5,7 +5,6 @@ import (
 )
 
 func main() {
-	logger.HttpLog.Info("Starting HTTP Server eeee")
-	logger.NodeLog.Info("Starting Node eeee")
+	logger.NodeLog.Info("Node started")
 	return
 }
