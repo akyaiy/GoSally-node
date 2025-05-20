@@ -1,0 +1,1 @@
+GoSally Basic Node
