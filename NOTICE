@@ -1,0 +1,4 @@
+This project uses third-party libraries:
+ - github.com/natefinch/lumberjack (MIT License)
+
+See third_party/licenses/ for full license texts.
