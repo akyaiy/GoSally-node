@@ -2,6 +2,7 @@ package main
 
 import (
 	"GoSally/internal/logger"
+	_ "modernc.org/sqlite"
 )
 
 func main() {
