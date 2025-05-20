@@ -1,11 +1,13 @@
 package logger
 
 import (
+	"gopkg.in/natefinch/lumberjack.v2"
+	"io"
 	"log/slog"
 	"os"
 )
 
-func createTextHandler(out *os.File, level slog.Level, addSource bool) slog.Handler {
+func createTextHandler(out io.Writer, level slog.Level, addSource bool) slog.Handler {
 	return slog.NewTextHandler(out, &slog.HandlerOptions{
 		Level:     level,
 		AddSource: addSource,
@@ -20,28 +22,31 @@ func createTextHandler(out *os.File, level slog.Level, addSource bool) slog.Hand
 	})
 }
 
-func createJsonHandler(out *os.File, level slog.Level, addSource bool) slog.Handler {
+func createJsonHandler(out io.Writer, level slog.Level, addSource bool) slog.Handler {
 	return slog.NewJSONHandler(out, &slog.HandlerOptions{
 		Level:     level,
 		AddSource: addSource,
 	})
 }
 
-func InitMultiHandler(logPath string, level slog.Level) (*slog.Logger, func() error, error) {
+func InitMultiHandler(stdout bool, slogPath string, level slog.Level) (*slog.Logger, error) {
 	var (
-		addSource = level == slog.LevelDebug
-		closeFunc = func() error { return nil }
+		addSource      = level == slog.LevelDebug
+		jsonHandler    slog.Handler
+		textHandler    slog.Handler
+		rotatingWriter = &lumberjack.Logger{
+			Filename:   slogPath,
+			MaxSize:    5,
+			MaxBackups: 3,
+			MaxAge:     7,
+			Compress:   true,
+		}
 	)
 
-	file, err := os.OpenFile(logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
-	if err != nil {
-		return nil, nil, err
+	jsonHandler = createJsonHandler(rotatingWriter, level, addSource)
+	if stdout {
+		textHandler = createTextHandler(os.Stdout, level, addSource)
+		return slog.New(NewMultiHandler(textHandler, jsonHandler)), nil
 	}
-	closeFunc = func() error { return file.Close() }
-
-	textHandler := createTextHandler(os.Stdout, level, addSource)
-	jsonHandler := createJsonHandler(file, level, addSource)
-
-	logger := slog.New(NewMultiHandler(textHandler, jsonHandler))
-	return logger, closeFunc, nil
+	return slog.New(NewMultiHandler(jsonHandler)), nil
 }
