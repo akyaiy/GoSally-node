@@ -1,4 +1,4 @@
-package database_test
+package sessions_test_test
 
 import (
 	"GoSally/internal/db/sqlite"
