@@ -3,6 +3,6 @@
 *.idea
 node
 
-log/
+**/log/
 **/database/
 !/internal/database/
