@@ -4,4 +4,5 @@
 node
 
 log/
-database/
+**/database/
+!/internal/database/
