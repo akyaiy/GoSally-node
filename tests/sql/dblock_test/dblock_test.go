@@ -1,7 +1,7 @@
 package dblock_test
 
 import (
-	"GoSally/internal/db/sqlite"
+	"GoSally/internal/database/sqlite"
 	_ "modernc.org/sqlite"
 	"os"
 	"testing"
@@ -50,7 +50,7 @@ func TestAttempt1ToOpenedDB(t *testing.T) {
 		panic(err)
 	}
 
-	err = testDriver.OpenDB("file:" + dir + "/database/node.db")
+	err = testDriver.OpenDB("file:" + dir + "/database/db.sqlite")
 	if err != nil {
 		panic("Error opening DB:" + err.Error())
 	}

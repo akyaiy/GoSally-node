@@ -1,39 +1,31 @@
 package main
 
 import (
-	"GoSally/internal/db/sqlite"
+	"GoSally/internal/database"
 	"GoSally/internal/logger"
 	"fmt"
-	"os"
 )
 
 func main() {
 	logger.NodeLog.Info("Node started")
 	var (
-		db     database.SQLiteDriver
-		id     = "5-22-2025"
-		answer []byte
+		id  = "5/22/2025"
+		ans []byte
 	)
-
-	dir, err := os.Getwd()
+	database.InitDB()
+	db := database.Driver
+	err := db.InitSession(id, []byte("SQLite works!"))
 	if err != nil {
-		panic(err)
+		logger.NodeLog.Error(err.Error())
+		return
 	}
 
-	err = db.OpenDB("file:" + dir + "/database/db.sqlite")
+	ans, err = db.QuerySession(id)
 	if err != nil {
-		panic("Error opening DB:" + err.Error())
+		logger.NodeLog.Error(err.Error())
+		return
 	}
-	defer func(db *database.SQLiteDriver) {
-		err := db.CloseDB()
-		if err != nil {
-			panic(err)
-		}
-	}(&db)
-
-	err = db.InitSession(id, []byte("SQL works!"))
-	answer, err = db.QuerySession(id)
-	fmt.Println("DB init \"5-22-2025\" data: ", string(answer))
+	fmt.Println(string(ans))
 	err = db.CloseSession(id)
 
 	return

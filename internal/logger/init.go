@@ -25,7 +25,7 @@ func initLog() {
 		panic(err)
 	}
 	NodeLog = NodeLog.With("logger", "node")
-	DatabaseLog, err = InitMultiHandler(false, dir+"/log/db.slog", slog.LevelInfo)
+	DatabaseLog, err = InitMultiHandler(false, dir+"/log/database.slog", slog.LevelInfo)
 	if err != nil {
 		panic(err)
 	}

@@ -1,7 +1,7 @@
 package sessions_test_test
 
 import (
-	"GoSally/internal/db/sqlite"
+	"GoSally/internal/database/sqlite"
 	"bytes"
 	_ "modernc.org/sqlite"
 	"os"
@@ -24,7 +24,7 @@ func TestMain(m *testing.M) {
 		panic(err)
 	}
 
-	err = testDriver.OpenDB("file:" + dir + "/database/node.db")
+	err = testDriver.OpenDB("file:" + dir + "/database/db.sqlite")
 	if err != nil {
 		panic("Error opening DB:" + err.Error())
 	}
