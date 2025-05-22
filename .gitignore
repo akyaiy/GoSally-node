@@ -2,3 +2,6 @@
 *.slog
 *.idea
 node
+
+log/
+database/

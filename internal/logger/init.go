@@ -2,23 +2,34 @@ package logger
 
 import (
 	"log/slog"
+	"os"
 )
 
 var HttpLog *slog.Logger
 var NodeLog *slog.Logger
+var DatabaseLog *slog.Logger
 
 func initLog() {
-	var err error
-	HttpLog, err = InitMultiHandler(true, "app.slog", slog.LevelInfo)
+	dir, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+
+	HttpLog, err = InitMultiHandler(true, dir+"/log/http.slog", slog.LevelInfo)
 	if err != nil {
 		panic(err)
 	}
 	HttpLog = HttpLog.With("logger", "http")
-	NodeLog, err = InitMultiHandler(false, "app.slog", slog.LevelInfo)
+	NodeLog, err = InitMultiHandler(false, dir+"/log/node.slog", slog.LevelInfo)
 	if err != nil {
 		panic(err)
 	}
 	NodeLog = NodeLog.With("logger", "node")
+	DatabaseLog, err = InitMultiHandler(false, dir+"/log/db.slog", slog.LevelInfo)
+	if err != nil {
+		panic(err)
+	}
+	DatabaseLog = DatabaseLog.With("logger", "database")
 }
 
 func init() {
