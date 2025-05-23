@@ -2,7 +2,6 @@ package main
 
 import (
 	"GoSally/internal/database"
-	"GoSally/internal/database/sqlite"
 	"GoSally/internal/logger"
 	"fmt"
 )
@@ -12,18 +11,17 @@ func main() {
 	var (
 		id  = "5/22/2025"
 		ans []byte
+		err error
 	)
 	database.InitDB()
-	defer func(Driver *sqlite_driver.Driver) {
-		err := Driver.CloseDB()
-		if err != nil {
-			panic(err)
+	defer func() {
+		if err = database.Driver.CloseDB(); err != nil {
+			logger.NodeLog.Error("Failed to close database", "err", err)
 		}
-	}(database.Driver)
+	}()
 	db := database.Driver
-	err := db.InitSession(id, []byte("SQLite works!"))
-	if err != nil {
-		logger.NodeLog.Error(err.Error())
+	if err = db.InitSession(id, []byte("SQLite works!")); err != nil {
+		logger.NodeLog.Error("InitSession failed", "err", err)
 		return
 	}
 

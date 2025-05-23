@@ -5,14 +5,13 @@ import (
 	"os"
 )
 
-var Driver *sqlite_driver.Driver
+var Driver DBSessions = &sqlite_driver.Driver{}
 
 func InitDB() {
 	dir, err := os.Getwd()
 	if err != nil {
 		panic(err)
 	}
-	Driver = &sqlite_driver.Driver{}
 
 	err = Driver.OpenDB("file:" + dir + "/database/db.sqlite")
 	if err != nil {

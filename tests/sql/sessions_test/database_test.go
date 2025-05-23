@@ -1,4 +1,4 @@
-package sessions_test_test
+package sessions_test
 
 import (
 	"GoSally/internal/database"
