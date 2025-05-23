@@ -29,6 +29,7 @@ func (s *Parser) ParseArgs(args []string) error {
 
 	s._config["execName"] = args[0]
 	keywords := config.Cfg.Keywords()
+	abbreviations := config.Abbr.Abbreviations()
 
 	for _, arg := range args[1:] {
 		if strings.HasPrefix(arg, "--") {
@@ -53,7 +54,7 @@ func (s *Parser) ParseArgs(args []string) error {
 		} else if strings.HasPrefix(arg, "-") && len(arg) == 2 {
 			key := arg[1:]
 			if contains(keywords, key) {
-				s._config[key] = "true"
+				s._config[abbreviations[key]] = "true"
 			} else {
 				return errors.New("invalid argument: " + arg)
 			}
