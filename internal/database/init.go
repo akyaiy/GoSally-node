@@ -7,14 +7,14 @@ import (
 	"syscall"
 )
 
-var Driver *database.SQLiteDriver
+var Driver *sqlite_driver.Driver
 
 func InitDB() {
 	dir, err := os.Getwd()
 	if err != nil {
 		panic(err)
 	}
-	Driver = &database.SQLiteDriver{}
+	Driver = &sqlite_driver.Driver{}
 
 	err = Driver.OpenDB("file:" + dir + "/database/db.sqlite")
 	if err != nil {

@@ -1,6 +1,7 @@
 package sessions_test_test
 
 import (
+	"GoSally/internal/database"
 	"GoSally/internal/database/sqlite"
 	"bytes"
 	_ "modernc.org/sqlite"
@@ -9,7 +10,7 @@ import (
 )
 
 var (
-	testDriver database.SQLiteDriver
+	testDriver database.DBSessions = &sqlite_driver.Driver{}
 
 	sessionId = "id12345"
 	reqData   = []byte("hello world")

@@ -1,6 +1,7 @@
 package dblock_test
 
 import (
+	"GoSally/internal/database"
 	"GoSally/internal/database/sqlite"
 	_ "modernc.org/sqlite"
 	"os"
@@ -8,7 +9,7 @@ import (
 )
 
 var (
-	testDriver database.SQLiteDriver
+	testDriver database.DBSessions = &sqlite_driver.Driver{}
 )
 
 func TestMain(m *testing.M) {

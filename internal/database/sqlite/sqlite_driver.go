@@ -1,4 +1,4 @@
-package database
+package sqlite_driver
 
 import (
 	"GoSally/internal/logger"
@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-type SQLiteDriver struct {
+type Driver struct {
 	db   *sql.DB
 	_src string
 
@@ -27,7 +27,7 @@ func ensureDBPath(src string) error {
 	return os.MkdirAll(dir, 0755)
 }
 
-func (s *SQLiteDriver) OpenDB(src string) error {
+func (s *Driver) OpenDB(src string) error {
 	if s._DBFileLock {
 		return errors.New("DB is already unlocked (opened)")
 	}
@@ -59,7 +59,7 @@ func (s *SQLiteDriver) OpenDB(src string) error {
 	return nil
 }
 
-func (s *SQLiteDriver) CloseDB() error {
+func (s *Driver) CloseDB() error {
 	if !s._DBFileLock {
 		return errors.New("DB is already locked (closed)")
 	}
@@ -74,7 +74,7 @@ func (s *SQLiteDriver) CloseDB() error {
 	return nil
 }
 
-func (s *SQLiteDriver) InitSession(id string, data []byte) error {
+func (s *Driver) InitSession(id string, data []byte) error {
 	if !s._DBFileLock {
 		return errors.New("DB is locked (closed)")
 	}
@@ -86,7 +86,7 @@ func (s *SQLiteDriver) InitSession(id string, data []byte) error {
 	return nil
 }
 
-func (s *SQLiteDriver) QuerySession(id string) (data []byte, err error) {
+func (s *Driver) QuerySession(id string) (data []byte, err error) {
 	if !s._DBFileLock {
 		return nil, errors.New("DB is locked (closed)")
 	}
@@ -99,7 +99,7 @@ func (s *SQLiteDriver) QuerySession(id string) (data []byte, err error) {
 	return data, nil
 }
 
-func (s *SQLiteDriver) CloseSession(id string) error {
+func (s *Driver) CloseSession(id string) error {
 	if !s._DBFileLock {
 		return errors.New("DB is locked (closed)")
 	}
