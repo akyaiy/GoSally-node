@@ -2,6 +2,7 @@ package main
 
 import (
 	"GoSally/internal/database"
+	"GoSally/internal/database/sqlite"
 	"GoSally/internal/logger"
 	"fmt"
 )
@@ -13,6 +14,12 @@ func main() {
 		ans []byte
 	)
 	database.InitDB()
+	defer func(Driver *sqlite_driver.Driver) {
+		err := Driver.CloseDB()
+		if err != nil {
+			panic(err)
+		}
+	}(database.Driver)
 	db := database.Driver
 	err := db.InitSession(id, []byte("SQLite works!"))
 	if err != nil {
