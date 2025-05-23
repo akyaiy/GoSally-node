@@ -6,8 +6,8 @@ type _configParser interface {
 
 type _paramParser interface {
 	ProgramConfig() map[string]string
-	ParseCMDlineArgs()
-	ParseArgs(args []string)
+	ParseCMDlineArgs() error
+	ParseArgs(args []string) error
 }
 
 type Parser interface {

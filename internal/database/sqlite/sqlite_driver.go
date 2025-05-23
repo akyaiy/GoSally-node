@@ -44,7 +44,7 @@ func (s *Driver) OpenDB(src string) error {
 		logger.DatabaseLog.Error("Error opening database", "db_source", s._src, "err", err)
 		return err
 	}
-	logger.DatabaseLog.Debug("The database is open", "db_source", s._src)
+	logger.DatabaseLog.Debug("The database is opened", "db_source", s._src)
 	createTableSQL := `
     CREATE TABLE IF NOT EXISTS sessions (
         session_id TEXT PRIMARY KEY,

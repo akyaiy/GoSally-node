@@ -14,10 +14,13 @@ func TestMain(m *testing.M) {
 }
 
 func TestParseArgs(t *testing.T) {
-	args := []string{"/path/to/prog", "--a=1", "--b=2"}
+	args := []string{"/path/to/prog", "--listen=0.0.0.0"}
 	var p config.Parser = &parser.Parser{}
-	p.ParseArgs(args)
-	want := map[string]string{"execName": "/path/to/prog", "a": "1", "b": "2"}
+	err := p.ParseArgs(args)
+	if err != nil {
+		t.Errorf("ParseArgs failed: %v", err)
+	}
+	want := map[string]string{"execName": "/path/to/prog", "listen": "0.0.0.0"}
 
 	if !reflect.DeepEqual(want, p.ProgramConfig()) {
 		t.Fatalf("Expected %+v, got %+v", want, p.ProgramConfig())

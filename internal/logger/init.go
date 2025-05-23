@@ -20,12 +20,12 @@ func initLog() {
 		panic(err)
 	}
 	HttpLog = HttpLog.With("logger", "http")
-	NodeLog, err = InitMultiHandler(false, dir+"/log/node.slog", slog.LevelInfo)
+	NodeLog, err = InitMultiHandler(true, dir+"/log/node.slog", slog.LevelInfo)
 	if err != nil {
 		panic(err)
 	}
 	NodeLog = NodeLog.With("logger", "node")
-	DatabaseLog, err = InitMultiHandler(true, dir+"/log/database.slog", slog.LevelInfo)
+	DatabaseLog, err = InitMultiHandler(true, dir+"/log/database.slog", slog.LevelDebug)
 	if err != nil {
 		panic(err)
 	}
