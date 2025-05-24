@@ -15,7 +15,8 @@ func init() {
 }
 
 func main() {
-	logger.NodeLog.Debug("Start")
+	logger.NodeLog.Info("Start")
+	logger.NodeLog.Debug("debug lol")
 	fmt.Println(parser.Cfgd.ProgramConfig())
 
 	return

@@ -3,6 +3,7 @@ package dblock_test
 import (
 	"GoSally/internal/database"
 	"GoSally/internal/database/sqlite"
+	"GoSally/internal/logger"
 	_ "modernc.org/sqlite"
 	"os"
 	"testing"
@@ -13,6 +14,7 @@ var (
 )
 
 func TestMain(m *testing.M) {
+	logger.InitLog("true")
 	code := m.Run()
 	os.Exit(code)
 }

@@ -40,3 +40,10 @@ func InitLog(logLevelDebug string) {
 	}
 	DatabaseLog = DatabaseLog.With("logger", "database")
 }
+
+// Automatic initialization of the base logger to avoid runtime errors
+func init() {
+	HttpLog = slog.Default().With("logger", "http")
+	NodeLog = slog.Default().With("logger", "node")
+	DatabaseLog = slog.Default().With("logger", "database")
+}

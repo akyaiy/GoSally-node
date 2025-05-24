@@ -3,6 +3,7 @@ package sessions_test
 import (
 	"GoSally/internal/database"
 	"GoSally/internal/database/sqlite"
+	"GoSally/internal/logger"
 	"bytes"
 	_ "modernc.org/sqlite"
 	"os"
@@ -20,6 +21,8 @@ var (
 )
 
 func TestMain(m *testing.M) {
+	logger.InitLog("true")
+
 	dir, err := os.Getwd()
 	if err != nil {
 		panic(err)
