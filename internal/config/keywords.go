@@ -1,23 +1,25 @@
 package config
 
-type _config struct {
-	keywords      []string
-	abbreviations map[string]string
+type _configConst struct {
+	Keywords      []string
+	Abbreviations map[string]string
 }
 
-func (c *_config) Keywords() []string {
-	return append([]string(nil), c.keywords...) // read-only view
+type Source int
+
+type ConfValue struct {
+	Value string
+	Src   Source
 }
 
-func (c *_config) Abbreviations() map[string]string {
-	return c.abbreviations
+var Defines = _configConst{
+	Keywords: []string{
+		"listen-address", "listen-port",
+		"debug",
+	},
+	Abbreviations: map[string]string{
+		"d": "debug",
+		"a": "listen-address",
+		"p": "listen-port",
+	},
 }
-
-var Cfg = _config{keywords: []string{
-	"listen-address", "listen-port",
-	"d", "debug",
-}}
-
-var Abbr = _config{abbreviations: map[string]string{
-	"d": "debug",
-}}

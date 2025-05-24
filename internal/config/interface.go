@@ -4,13 +4,13 @@ package config
 //	ParseConfigFile(path string)
 //}
 
-type _paramParser interface {
-	ProgramConfig() map[string]string
+type _CMDLineParser interface {
+	ProgramConfig() TypeConfig
 	ParseCMDlineArgs() error
 	ParseArgs(args []string) error
 }
 
 type Parser interface {
 	//	_configParser
-	_paramParser
+	_CMDLineParser
 }

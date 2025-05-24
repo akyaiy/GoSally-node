@@ -1,30 +1,22 @@
 package main
 
 import (
-	"GoSally/internal/config"
 	parser "GoSally/internal/config/parsers"
 	"GoSally/internal/logger"
 	"fmt"
-	"log/slog"
 	"os"
 )
 
-var (
-	cfgd config.Parser = &parser.Parser{}
-)
-
 func init() {
-	if err := cfgd.ParseCMDlineArgs(); err != nil {
-		slog.Error("Failed to parse cmdline args", "err", err)
+	if err := parser.Cfgd.ParseCMDlineArgs(); err != nil {
 		os.Exit(5)
-		return
 	}
-	logger.InitLog(cfgd.ProgramConfig()["debug"])
+	logger.InitLog(parser.Cfgd.ProgramConfig()["debug"].Value)
 }
 
 func main() {
 	logger.NodeLog.Debug("Start")
-	fmt.Println(cfgd.ProgramConfig())
+	fmt.Println(parser.Cfgd.ProgramConfig())
 
 	return
 }
