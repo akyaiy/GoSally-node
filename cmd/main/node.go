@@ -1,9 +1,9 @@
 package main
 
 import (
-	parser "GoSally/internal/config/parsers"
-	"GoSally/internal/logger"
 	"fmt"
+	parser "github.com/akyaiy/GoSally-node/internal/config/parsers"
+	"github.com/akyaiy/GoSally-node/internal/logger"
 	"os"
 )
 

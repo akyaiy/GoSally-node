@@ -1,6 +1,6 @@
 package parser
 
-import "GoSally/internal/config"
+import "github.com/akyaiy/GoSally-node/internal/config"
 
 type Parser struct {
 	_config config.TypeConfig

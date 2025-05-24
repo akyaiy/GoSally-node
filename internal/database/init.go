@@ -1,8 +1,8 @@
 package database
 
 import (
-	"GoSally/internal/database/sqlite"
-	"GoSally/internal/logger"
+	"github.com/akyaiy/GoSally-node/internal/database/sqlite"
+	"github.com/akyaiy/GoSally-node/internal/logger"
 	"os"
 )
 

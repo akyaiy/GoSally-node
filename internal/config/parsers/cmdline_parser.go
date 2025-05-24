@@ -1,8 +1,8 @@
 package parser
 
 import (
-	"GoSally/internal/config"
 	"errors"
+	"github.com/akyaiy/GoSally-node/internal/config"
 	"log/slog"
 	"os"
 	"strings"

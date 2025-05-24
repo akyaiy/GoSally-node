@@ -1,9 +1,9 @@
 package sqlite_driver
 
 import (
-	"GoSally/internal/logger"
 	"database/sql"
 	"errors"
+	"github.com/akyaiy/GoSally-node/internal/logger"
 	_ "modernc.org/sqlite"
 	"os"
 	"path/filepath"

@@ -1,9 +1,9 @@
 package dblock_test
 
 import (
-	"GoSally/internal/database"
-	"GoSally/internal/database/sqlite"
-	"GoSally/internal/logger"
+	"github.com/akyaiy/GoSally-node/internal/database"
+	"github.com/akyaiy/GoSally-node/internal/database/sqlite"
+	"github.com/akyaiy/GoSally-node/internal/logger"
 	_ "modernc.org/sqlite"
 	"os"
 	"testing"

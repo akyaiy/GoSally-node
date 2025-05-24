@@ -1,9 +1,9 @@
 package parser
 
 import (
-	"GoSally/internal/config"
 	"errors"
 	"fmt"
+	"github.com/akyaiy/GoSally-node/internal/config"
 	"log/slog"
 	"strings"
 )
